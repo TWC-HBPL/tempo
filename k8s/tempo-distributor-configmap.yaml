@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-distributor-config
+  namespace: observability
+data:
+  tempo.yaml: |
+    distributor:
+      receivers:
+        otlp:
+          protocols:
+            http:
+              endpoint: 0.0.0.0:4318
+
+    usage_report:
+      enabled: false

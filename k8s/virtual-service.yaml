@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: tempo-vs
+  namespace: observability
+  labels:
+    app: tempo
+spec:
+  hosts:
+    - testing-consumer-app.thirdwavecoffee.in
+  gateways:
+    - testing-api-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /v1/traces
+      route:
+        - destination:
+            host: tempo-distributor.observability.svc.cluster.local
+            port:
+              number: 4318

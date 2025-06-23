@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo-compactor
+  namespace: observability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tempo-compactor
+  template:
+    metadata:
+      labels:
+        app: tempo-compactor
+    spec:
+      containers:
+        - name: tempo
+          image: grafana/tempo:2.8.1
+          args:
+            - "-target=compactor"
+            - "-config.file=/etc/tempo.yaml"
+          volumeMounts:
+            - name: tempo-config
+              mountPath: /etc/tempo.yaml
+              subPath: tempo.yaml
+      volumes:
+        - name: tempo-config
+          configMap:
+            name: tempo-compactor-config

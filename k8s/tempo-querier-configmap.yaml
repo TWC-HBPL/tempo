@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-querier-config
+  namespace: observability
+data:
+  tempo.yaml: |
+    querier: {}
+
+    storage:
+      trace:
+        backend: local
+        local:
+          directory: /var/tempo/blocks
+    
+    usage_report:
+      enabled: false
