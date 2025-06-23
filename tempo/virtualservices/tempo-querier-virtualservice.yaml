@@ -12,8 +12,6 @@ spec:
     - match:
         - uri:
             prefix: /api/traces
-      rewrite:
-        uri: /
       route:
         - destination:
             host: tempo-querier.observability.svc.cluster.local
