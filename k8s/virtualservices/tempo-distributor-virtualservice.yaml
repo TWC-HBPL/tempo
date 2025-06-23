@@ -1,15 +1,13 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: tempo-vs
+  name: tempo-distributor-vs
   namespace: observability
-  labels:
-    app: tempo
 spec:
   hosts:
-    - testing-consumer-app.thirdwavecoffee.in
+    - tempo-distributor.thirdwavecoffee.in
   gateways:
-    - testing-api-gateway
+    - istio-ingress/testing-api-gateway
   http:
     - match:
         - uri:

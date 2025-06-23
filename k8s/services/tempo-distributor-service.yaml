@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: tempo-distributor
   namespace: observability
-  labels:
-    app: tempo-distributor
 spec:
   selector:
     app: tempo-distributor
@@ -12,3 +10,4 @@ spec:
     - name: otlp-http
       port: 4318
       targetPort: 4318
+  type: ClusterIP

@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: tempo-querier-vs
+  namespace: observability
+spec:
+  hosts:
+    - tempo-querier.thirdwavecoffee.in
+  gateways:
+    - istio-ingress/testing-api-gateway
+  http:
+    - route:
+        - destination:
+            host: tempo-querier.observability.svc.cluster.local
+            port:
+              number: 3100
