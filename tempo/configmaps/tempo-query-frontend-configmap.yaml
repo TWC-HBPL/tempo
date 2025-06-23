@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-query-frontend-config
+  namespace: observability
+data:
+  tempo.yaml: |
+    server:
+      http_listen_port: 3100          # HTTP port (optional, useful for metrics/health)
+      grpc_listen_port: 9095          # gRPC port querier connects to
+    storage:
+      trace:
+        backend: s3
+        s3:
+          bucket: tempo-logs-testing
+          endpoint: s3.ap-south-1.amazonaws.com
+          region: ap-south-1
+          insecure: false
+    frontend:
+    # Frontend settings can be added here if needed

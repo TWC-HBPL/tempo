@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo-query-frontend
+  namespace: observability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tempo-query-frontend
+  template:
+    metadata:
+      labels:
+        app: tempo-query-frontend
+    spec:
+      containers:
+        - name: query-frontend
+          image: grafana/tempo
+          args:
+            - "-target=query-frontend"
+            - "-config.file=/etc/tempo/tempo.yaml"
+          ports:
+            - containerPort: 9095  # gRPC port
+            - containerPort: 3100  # HTTP port (optional)
+          volumeMounts:
+            - name: config
+              mountPath: /etc/tempo
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: tempo-query-frontend-config
