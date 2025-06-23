@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tempo-ingester
+  name: tempo-querier
   namespace: observability
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tempo-ingester
+      app: tempo-querier
   template:
     metadata:
       labels:
-        app: tempo-ingester
+        app: tempo-querier
     spec:
       containers:
         - name: tempo
-          image: <your-ecr-repo>/tempo:latest
+          image: grafana/tempo
           args:
             - -config.file=/etc/tempo.yaml
-            - -target=ingester
+            - -target=querier
           volumeMounts:
             - name: config
               mountPath: /etc/tempo.yaml
@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: tempo-ingester-config
+            name: tempo-querier-config

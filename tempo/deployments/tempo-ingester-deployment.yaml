@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tempo-distributor
+  name: tempo-ingester
   namespace: observability
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tempo-distributor
+      app: tempo-ingester
   template:
     metadata:
       labels:
-        app: tempo-distributor
+        app: tempo-ingester
     spec:
       containers:
         - name: tempo
-          image: <your-ecr-repo>/tempo:latest
+          image: grafana/tempo
           args:
             - -config.file=/etc/tempo.yaml
-            - -target=distributor
+            - -target=ingester
           volumeMounts:
             - name: config
               mountPath: /etc/tempo.yaml
@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: tempo-distributor-config
+            name: tempo-ingester-config

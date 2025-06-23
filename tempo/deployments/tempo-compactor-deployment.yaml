@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: tempo
-          image: <your-ecr-repo>/tempo:latest
+          image: grafana/tempo
           args:
             - -config.file=/etc/tempo.yaml
             - -target=compactor
