@@ -5,9 +5,9 @@ metadata:
   namespace: observability
 spec:
   hosts:
-    - tempo-distributor.thirdwavecoffee.in
+    - testing-consumer-app.thirdwavecoffee.in
   gateways:
-    - istio-ingress/testing-api-gateway
+    - istio-system/testing-api-gateway
   http:
     - match:
         - uri:

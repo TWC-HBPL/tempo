@@ -5,11 +5,16 @@ metadata:
   namespace: observability
 spec:
   hosts:
-    - tempo-querier.thirdwavecoffee.in
+    - testing-consumer-app.thirdwavecoffee.in
   gateways:
-    - istio-ingress/testing-api-gateway
+    - istio-system/testing-api-gateway
   http:
-    - route:
+    - match:
+        - uri:
+            prefix: /api/traces
+      rewrite:
+        uri: /
+      route:
         - destination:
             host: tempo-querier.observability.svc.cluster.local
             port:
