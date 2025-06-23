@@ -6,13 +6,8 @@ metadata:
 data:
   tempo.yaml: |
     querier:
-      frontend_address: tempo-query-frontend.observability.svc.cluster.local:9095
-      query_timeout: 60s
-      max_query_length: 24h
-      max_query_lookback: 24h
-      max_query_parallelism: 32
-      max_query_series: 1000000
-      max_query_length_per_user: 24h
+      frontend_worker:
+        frontend_address: tempo-query-frontend.observability.svc.cluster.local:9095
 
     storage:
       trace:
