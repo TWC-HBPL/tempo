@@ -11,6 +11,3 @@ data:
           protocols:
             http:
               endpoint: 0.0.0.0:4318
-
-    usage_report:
-      enabled: false

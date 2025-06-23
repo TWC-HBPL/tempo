@@ -15,5 +15,3 @@ data:
         local:
           path: /var/tempo/blocks
     
-    usage_report:
-      enabled: false
