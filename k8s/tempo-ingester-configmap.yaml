@@ -11,9 +11,11 @@ data:
 
     storage:
       trace:
-        # **Crucial Change:** Use 'filesystem' backend for local disk storage
-        backend: filesystem
-        filesystem:
-          directory: /var/tempo/blocks
-          # 'wal_directory' is nested under 'filesystem'
-          wal_directory: /var/tempo/wal
+        backend: s3
+        s3:
+          bucket: twcr-app-logs-grafana-tempo
+          endpoint: s3.ap-south-1.amazonaws.com
+          region: ap-south-1
+          access_key: ${S3_ACCESS_KEY}
+          secret_key: ${S3_SECRET_KEY}
+          insecure: false

@@ -11,3 +11,14 @@ data:
           protocols:
             http:
               endpoint: 0.0.0.0:4318
+
+    storage:
+      trace:
+        backend: s3
+        s3:
+          bucket: twcr-app-logs-grafana-tempo
+          endpoint: s3.ap-south-1.amazonaws.com
+          region: ap-south-1
+          access_key: ${S3_ACCESS_KEY}
+          secret_key: ${S3_SECRET_KEY}
+          insecure: false
